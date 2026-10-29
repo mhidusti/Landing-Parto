@@ -1,479 +1,190 @@
-import { useMemo, useState } from "react";
+
+"use client";
+
+import React, { useState } from "react";
 import {
-  Search,
-  ArrowUpLeft,
-  Sparkles,
-  SlidersHorizontal,
-  X,
-  Check,
-  Smartphone,
   Monitor,
-  ArrowLeft,
+  Smartphone,
+  ExternalLink,
+  Laptop,
 } from "lucide-react";
 
-type Product = {
-  id: number;
-  name: string;
-  category: string;
-  price: number;
-  color: string;
-  image: string;
-  icon: string;
-  badge?: string;
-};
+const PARTO_URL = "https://demo-parto.chbkn.dev/";
 
-const products: Product[] = [
-  {
-    id: 1,
-    name: "عطر نوا",
-    category: "عطر و ادکلن",
-    price: 1850000,
-    color: "from-[#e7d9c6] to-[#b69a79]",
-    image: "/images/products/perfume-nova.png",
-    icon: "✧",
-    badge: "پرفروش",
-  },
-  {
-    id: 2,
-    name: "کیف آوید",
-    category: "اکسسوری",
-    price: 2450000,
-    color: "from-[#d8c6b5] to-[#8c6b54]",
-    image: "/images/products/bag-avid.png",
-    icon: "◈",
-  },
-  {
-    id: 3,
-    name: "ساعت ماهور",
-    category: "اکسسوری",
-    price: 3200000,
-    color: "from-[#e9e3d7] to-[#b5a58e]",
-    image: "/images/products/watch-mahoor.png",
-    icon: "◉",
-    badge: "جدید",
-  },
-  {
-    id: 4,
-    name: "عطر لیان",
-    category: "عطر و ادکلن",
-    price: 1650000,
-    color: "from-[#c9b39a] to-[#735b45]",
-    image: "/images/products/perfume-lian.png",
-    icon: "✦",
-  },
-  {
-    id: 5,
-    name: "کرم آریسا",
-    category: "زیبایی",
-    price: 890000,
-    color: "from-[#ead9d0] to-[#bd978b]",
-    image: "/images/products/cream-arisa.png",
-    icon: "❋",
-  },
-  {
-    id: 6,
-    name: "عینک راد",
-    category: "اکسسوری",
-    price: 1250000,
-    color: "from-[#b7ada0] to-[#5e554d]",
-    image: "/images/products/glasses-rad.png",
-    icon: "◇",
-  },
-];
-
-const categories = [
-  "همه",
-  "عطر و ادکلن",
-  "اکسسوری",
-  "زیبایی",
-];
-
-const formatPrice = (price: number) =>
-  new Intl.NumberFormat("fa-IR").format(price) + " تومان";
-
-export default function PartoInteractiveDemo() {
-  const [category, setCategory] = useState("همه");
-  const [search, setSearch] = useState("");
-  const [view, setView] = useState<"desktop" | "mobile">("desktop");
-  const [selectedProduct, setSelectedProduct] =
-    useState<Product | null>(null);
-
-  const filteredProducts = useMemo(() => {
-    return products.filter((product) => {
-      const matchesCategory =
-        category === "همه" || product.category === category;
-
-      const matchesSearch = product.name
-        .toLowerCase()
-        .includes(search.trim().toLowerCase());
-
-      return matchesCategory && matchesSearch;
-    });
-  }, [category, search]);
+export default function PartoMacbookShowcase() {
+  const [deviceMode, setDeviceMode] = useState<
+    "desktop" | "mobile"
+  >("desktop");
 
   return (
     <section
-      id="parto-demo"
+      id="parto-laptop-showcase"
       dir="rtl"
-      className="relative overflow-hidden bg-[#f4f0e9] px-4 py-20 text-[#25221e] sm:px-8 lg:px-12"
+      className="relative overflow-hidden bg-[#0d0d0d] px-4 py-20 font-sans text-[#F7F5F0] sm:px-8 lg:px-12 lg:py-28"
     >
-      {/* Background decoration */}
-      <div className="pointer-events-none absolute -right-40 -top-40 h-[450px] w-[450px] rounded-full bg-[#d9c5a8]/20 blur-[100px]" />
+      {/* Background Glow */}
+      <div className="pointer-events-none absolute left-1/2 top-1/3 h-[550px] w-[550px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#D8C2A8]/5 blur-[150px]" />
 
-      <div className="relative mx-auto grid max-w-7xl items-center gap-14 lg:grid-cols-[1.1fr_0.9fr] lg:gap-20">
-        {/* Interactive Store Preview */}
-        <div className="order-2 min-w-0 lg:order-1">
-          <div className="mx-auto max-w-[650px] overflow-hidden rounded-2xl border border-[#d9d0c4] bg-[#fcfaf7] shadow-[0_30px_90px_-35px_rgba(49,37,25,0.25)]">
-            {/* Browser Header */}
-            <div className="flex h-12 items-center justify-between border-b border-[#e7e0d7] px-4 sm:px-5">
-              <div className="flex items-center gap-1.5">
-                <span className="h-2 w-2 rounded-full bg-[#d5b7aa]" />
-                <span className="h-2 w-2 rounded-full bg-[#ddcba8]" />
-                <span className="h-2 w-2 rounded-full bg-[#b9c6b0]" />
-              </div>
-
-              <span className="text-[10px] tracking-[0.35em] text-[#a29382]">
-                PARTO STUDIO
-              </span>
-
-              <Sparkles
-                size={16}
-                strokeWidth={1.3}
-                className="text-[#a78a66]"
-              />
-            </div>
-
-            {/* Store Content */}
-            <div className="px-4 pb-5 pt-5 sm:px-6">
-              <div className="mb-5 flex items-end justify-between gap-3">
-                <div>
-                  <p className="mb-1 text-[10px] text-[#9a8876]">
-                    مجموعه منتخب پرتو
-                  </p>
-
-                  <h3 className="text-xl font-medium sm:text-2xl">
-                    انتخابی برای سلیقه‌ی شما
-                  </h3>
-                </div>
-
-                <Sparkles
-                  size={20}
-                  strokeWidth={1.3}
-                  className="mb-1 text-[#a78a66]"
-                />
-              </div>
-
-              {/* Search */}
-              <div className="flex items-center gap-2 rounded-xl border border-[#e8e0d6] bg-white px-3">
-                <Search
-                  size={15}
-                  className="shrink-0 text-[#a39788]"
-                />
-
-                <input
-                  value={search}
-                  onChange={(event) => setSearch(event.target.value)}
-                  placeholder="جست‌وجوی محصول..."
-                  aria-label="جست‌وجوی محصول"
-                  className="h-10 min-w-0 flex-1 bg-transparent text-xs outline-none placeholder:text-[#b6aca0]"
-                />
-
-                {search && (
-                  <button
-                    type="button"
-                    onClick={() => setSearch("")}
-                    aria-label="پاک کردن جست‌وجو"
-                    className="text-[#8d8071]"
-                  >
-                    <X size={14} />
-                  </button>
-                )}
-              </div>
-
-              {/* Categories */}
-              <div className="mt-4 flex items-center gap-2 overflow-x-auto pb-1">
-                <SlidersHorizontal
-                  size={15}
-                  className="shrink-0 text-[#9a8876]"
-                />
-
-                {categories.map((item) => (
-                  <button
-                    key={item}
-                    type="button"
-                    onClick={() => setCategory(item)}
-                    className={`shrink-0 rounded-full px-3 py-2 text-[10px] transition-all duration-200 ${
-                      category === item
-                        ? "bg-[#302b25] text-white"
-                        : "border border-[#e8e0d6] bg-white text-[#766b5e] hover:border-[#b5a18a]"
-                    }`}
-                  >
-                    {item}
-                  </button>
-                ))}
-              </div>
-
-              {/* Products */}
-              <div
-                className={`mt-5 grid gap-3 ${
-                  view === "mobile"
-                    ? "grid-cols-2"
-                    : "grid-cols-2 sm:grid-cols-3"
-                }`}
-              >
-                {filteredProducts.map((product) => (
-                  <article
-                    key={product.id}
-                    className="group min-w-0 overflow-hidden rounded-xl border border-[#eee7de] bg-white transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
-                  >
-                    <button
-                      type="button"
-                      onClick={() => setSelectedProduct(product)}
-                      aria-label={`مشاهده ${product.name}`}
-                      className={`relative flex aspect-[1.12/1] w-full items-center justify-center overflow-hidden bg-gradient-to-br ${product.color}`}
-                    >
-                      {/* Placeholder icon behind the image */}
-                      <span className="text-6xl text-white/80 drop-shadow-md">
-                        {product.icon}
-                      </span>
-
-                      {/* Real product image */}
-                      <img
-                        src={product.image}
-                        alt={product.name}
-                        loading="lazy"
-                        onError={(event) => {
-                          event.currentTarget.style.display = "none";
-                        }}
-                        className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                      />
-
-                      {product.badge && (
-                        <span className="absolute right-2 top-2 rounded-full bg-[#fcfaf7]/90 px-2 py-1 text-[9px] text-[#64513d]">
-                          {product.badge}
-                        </span>
-                      )}
-
-                      <span className="absolute bottom-2 left-2 grid h-7 w-7 translate-y-2 place-items-center rounded-full bg-white/90 text-[#40362b] opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
-                        <ArrowUpLeft size={15} />
-                      </span>
-                    </button>
-
-                    <div className="p-3">
-                      <p className="truncate text-xs font-medium">
-                        {product.name}
-                      </p>
-
-                      <p className="mt-1 text-[9px] text-[#9b8e80]">
-                        {product.category}
-                      </p>
-
-                      <div className="mt-3 flex items-center justify-between gap-1">
-                        <span className="text-[10px] font-medium sm:text-[11px]">
-                          {new Intl.NumberFormat("fa-IR").format(
-                            product.price
-                          )}
-
-                          <span className="mr-1 text-[9px] text-[#9b8e80]">
-                            تومان
-                          </span>
-                        </span>
-
-                        <span
-                          aria-hidden="true"
-                          className="grid h-7 w-7 shrink-0 place-items-center rounded-lg border border-[#e8e0d6] text-[#8b7054] transition group-hover:bg-[#302b25] group-hover:text-white"
-                        >
-                          <ArrowUpLeft size={14} />
-                        </span>
-                      </div>
-                    </div>
-                  </article>
-                ))}
-              </div>
-
-              {filteredProducts.length === 0 && (
-                <div className="py-12 text-center text-sm text-[#928474]">
-                  محصولی با این مشخصات پیدا نشد.
-                </div>
-              )}
-
-              {/* Preview Footer */}
-              <div className="mt-5 flex items-center justify-between gap-3 border-t border-[#e9e1d7] pt-4">
-                <div className="flex items-center gap-2 text-[10px] text-[#948575]">
-                  <Check size={14} />
-                  <span>پیش‌نمایش تعاملی فروشگاه</span>
-                </div>
-
-                <div className="flex items-center gap-1 rounded-lg border border-[#e8e0d6] p-1">
-                  <button
-                    type="button"
-                    onClick={() => setView("desktop")}
-                    aria-label="نمای دسکتاپ"
-                    className={`rounded-md p-1.5 transition ${
-                      view === "desktop"
-                        ? "bg-[#302b25] text-white"
-                        : "text-[#8d8071] hover:bg-[#eee7dd]"
-                    }`}
-                  >
-                    <Monitor size={14} />
-                  </button>
-
-                  <button
-                    type="button"
-                    onClick={() => setView("mobile")}
-                    aria-label="نمای موبایل"
-                    className={`rounded-md p-1.5 transition ${
-                      view === "mobile"
-                        ? "bg-[#302b25] text-white"
-                        : "text-[#8d8071] hover:bg-[#eee7dd]"
-                    }`}
-                  >
-                    <Smartphone size={14} />
-                  </button>
-                </div>
-              </div>
-            </div>
+      <div className="relative mx-auto max-w-6xl">
+        {/* Header */}
+        <div className="mb-12 text-center">
+          <div className="mx-auto mb-4 inline-flex items-center gap-2 rounded-full border border-[#2A2723] bg-[#161513] px-4 py-2 text-[11px] text-[#D8C2A8]">
+            <Laptop size={14} />
+            پیش‌نمایش زنده قالب پرتو
           </div>
 
-          <p className="mt-4 text-center text-[10px] text-[#968879]">
-            برای مشاهده‌ی جزئیات، روی هر محصول کلیک کن.
-          </p>
-        </div>
-
-        {/* Introduction */}
-        <div className="order-1 text-right lg:order-2">
-          <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-[#d9cbbb] bg-white/60 px-3 py-2 text-[10px] text-[#7f6a53]">
-            <span className="h-1.5 w-1.5 rounded-full bg-[#9b8060]" />
-            تجربه‌ای فراتر از یک قالب
-          </div>
-
-          <h2 className="text-3xl font-semibold leading-[1.7] tracking-tight sm:text-4xl lg:text-[42px]">
-            قبل از خرید،
-            <br />
-            <span className="font-normal text-[#9a7b58]">
-              خودت امتحانش کن.
-            </span>
+          <h2 className="text-3xl font-medium tracking-tight sm:text-4xl">
+            پرتو را از نزدیک تجربه کنید
           </h2>
 
-          <p className="mt-5 max-w-lg text-sm leading-8 text-[#82786d]">
-            با پیش‌نمایش تعاملی پرتو کار کن؛ محصولات را جست‌وجو کن،
-            دسته‌بندی‌ها را تغییر بده و جزئیات محصولات را ببین.
-            کیفیت یک قالب را باید در عملکردش دید، نه فقط در تصاویرش.
-          </p>
-
-          <div className="mt-8 space-y-4">
-            {[
-              "جست‌وجوی تعاملی محصولات",
-              "فیلتر دسته‌بندی و نمایش نتایج",
-              "نمایش جزئیات و تصاویر محصولات",
-              "پیش‌نمایش چیدمان در حالت موبایل",
-            ].map((feature) => (
-              <div
-                key={feature}
-                className="flex items-center gap-3 text-sm text-[#51483e]"
-              >
-                <span className="grid h-6 w-6 shrink-0 place-items-center rounded-full border border-[#d8c7b2] text-[#8e7659]">
-                  <Check size={13} />
-                </span>
-
-                {feature}
-              </div>
-            ))}
-          </div>
-
-          <button
-            type="button"
-            onClick={() => {
-              document.getElementById("parto-demo")?.scrollIntoView({
-                behavior: "smooth",
-                block: "center",
-              });
-            }}
-            className="mt-9 inline-flex items-center gap-3 rounded-full bg-[#302b25] px-6 py-3.5 text-xs text-white transition-all duration-300 hover:bg-[#80674d]"
-          >
-            تجربه‌ی فروشگاه
-            <ArrowLeft size={15} />
-          </button>
-
-          <p className="mt-4 text-[10px] text-[#a29688]">
-            پیش‌نمایش تعاملی قالب پرتو
+          <p className="mx-auto mt-4 max-w-lg text-sm leading-7 text-[#A89F91]">
+            طراحی، جزئیات و تجربه کاربری قالب پرتو را
+            در نمایش دسکتاپ و موبایل بررسی کنید.
           </p>
         </div>
-      </div>
 
-      {/* Product Details Modal */}
-      {selectedProduct && (
-        <div
-          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 p-4 backdrop-blur-sm"
-          onMouseDown={(event) => {
-            if (event.target === event.currentTarget) {
-              setSelectedProduct(null);
-            }
-          }}
-        >
-          <div
-            dir="rtl"
-            className="relative w-full max-w-sm overflow-hidden rounded-2xl bg-[#fcfaf7] shadow-2xl"
-          >
-            <button
-              type="button"
-              onClick={() => setSelectedProduct(null)}
-              aria-label="بستن جزئیات محصول"
-              className="absolute left-3 top-3 z-10 grid h-9 w-9 place-items-center rounded-full bg-white/90 text-[#302b25] transition hover:bg-white"
-            >
-              <X size={18} />
-            </button>
-
-            <div
-              className={`relative flex aspect-[1.3/1] items-center justify-center overflow-hidden bg-gradient-to-br ${selectedProduct.color}`}
-            >
-              <span className="text-8xl text-white/80 drop-shadow-lg">
-                {selectedProduct.icon}
-              </span>
-
-              <img
-                src={selectedProduct.image}
-                alt={selectedProduct.name}
-                onError={(event) => {
-                  event.currentTarget.style.display = "none";
-                }}
-                className="absolute inset-0 h-full w-full object-cover"
-              />
+        {/* Device Stage */}
+        <div className="relative mx-auto max-w-4xl">
+          {/* Controls */}
+          <div className="mb-5 flex flex-wrap items-center justify-between gap-4 px-2">
+            <div className="flex items-center gap-2 text-xs text-[#A89F91]">
+              <span className="h-2 w-2 rounded-full bg-[#D8C2A8]" />
+              فروشگاه اینترنتی پرتو
             </div>
 
-            <div className="p-6">
-              <p className="text-xs text-[#9a8876]">
-                {selectedProduct.category}
-              </p>
+            <div className="flex items-center gap-1 rounded-xl border border-[#2A2723] bg-[#141311] p-1">
+              <button
+                type="button"
+                onClick={() => setDeviceMode("desktop")}
+                aria-pressed={deviceMode === "desktop"}
+                className={`flex items-center gap-2 rounded-lg px-4 py-2 text-xs transition-all ${
+                  deviceMode === "desktop"
+                    ? "bg-[#D8C2A8] font-semibold text-[#111111]"
+                    : "text-[#8C8275] hover:text-white"
+                }`}
+              >
+                <Monitor size={14} />
+                دسکتاپ
+              </button>
 
-              <h3 className="mt-2 text-xl font-medium">
-                {selectedProduct.name}
+              <button
+                type="button"
+                onClick={() => setDeviceMode("mobile")}
+                aria-pressed={deviceMode === "mobile"}
+                className={`flex items-center gap-2 rounded-lg px-4 py-2 text-xs transition-all ${
+                  deviceMode === "mobile"
+                    ? "bg-[#D8C2A8] font-semibold text-[#111111]"
+                    : "text-[#8C8275] hover:text-white"
+                }`}
+              >
+                <Smartphone size={14} />
+                موبایل
+              </button>
+            </div>
+          </div>
+
+          {/* Device Frame */}
+          <div className="relative mx-auto flex flex-col items-center">
+            <div
+              className={`relative overflow-hidden border-[5px] border-[#2D2A26] bg-[#111111] shadow-[0_25px_80px_-15px_rgba(0,0,0,0.9)] transition-all duration-500 ${
+                deviceMode === "desktop"
+                  ? "aspect-[16/10] w-full rounded-t-2xl"
+                  : "aspect-[9/18] w-[min(100%,340px)] rounded-[2.5rem] border-[7px]"
+              }`}
+            >
+              {deviceMode === "desktop" ? (
+                <div className="flex h-9 items-center justify-between border-b border-[#22201D] bg-[#181614] px-4">
+                  <div className="flex items-center gap-1.5">
+                    <span className="h-2.5 w-2.5 rounded-full bg-[#FF5F56]" />
+                    <span className="h-2.5 w-2.5 rounded-full bg-[#FFBD2E]" />
+                    <span className="h-2.5 w-2.5 rounded-full bg-[#27C93F]" />
+                  </div>
+
+                  <div
+                    dir="ltr"
+                    className="max-w-[65%] truncate rounded-md bg-[#0D0D0D] px-4 py-1 text-[10px] text-[#D8C2A8]"
+                  >
+                    demo-parto.chbkn.dev
+                  </div>
+
+                  <ExternalLink
+                    size={13}
+                    className="text-[#D8C2A8]/60"
+                  />
+                </div>
+              ) : (
+                <div className="pointer-events-none absolute left-1/2 top-2 z-10 h-5 w-24 -translate-x-1/2 rounded-full bg-black" />
+              )}
+
+              {/* Live Website */}
+              <div
+                className={`relative w-full overflow-hidden bg-[#F7F5F0] ${
+                  deviceMode === "desktop"
+                    ? "h-[calc(100%-2.25rem)]"
+                    : "h-full"
+                }`}
+              >
+                <iframe
+                  key={deviceMode}
+                  src={PARTO_URL}
+                  title="پیش‌نمایش زنده فروشگاه پرتو"
+                  loading="lazy"
+                  className="h-full w-full border-0 bg-white"
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                  }}
+                />
+              </div>
+            </div>
+
+            {/* Laptop Base */}
+            {deviceMode === "desktop" && (
+              <div className="relative mx-auto h-4 w-[105%] max-w-[105%] rounded-b-xl border-t border-[#3A3631] bg-gradient-to-b from-[#25221F] to-[#161513] shadow-2xl">
+                <div className="absolute left-1/2 top-0 h-1.5 w-16 -translate-x-1/2 rounded-b-md bg-[#111111]" />
+              </div>
+            )}
+          </div>
+
+          {/* Footer */}
+          <div className="mt-12 flex flex-col items-center justify-between gap-6 border-t border-[#222222] pt-7 sm:flex-row">
+            <div>
+              <h3 className="text-lg font-medium">
+                فروشگاه اینترنتی پرتو
               </h3>
 
-              <p className="mt-3 text-sm leading-7 text-[#82786d]">
-                جزئیات این محصول را در پیش‌نمایش پرتو بررسی کن؛
-                طراحی ساده، چیدمان منظم و تجربه‌ای یکپارچه برای
-                مشاهده‌ی محصولات.
+              <p className="mt-2 max-w-lg text-xs leading-7 text-[#A89F91]">
+                قالب فروشگاهی فارسی و راست‌به‌چپ،
+                توسعه‌یافته با Next.js، TypeScript
+                و Tailwind CSS.
               </p>
 
-              <div className="mt-6 flex items-center justify-between gap-3">
-                <span className="text-sm font-medium">
-                  {formatPrice(selectedProduct.price)}
-                </span>
-
-                <button
-                  type="button"
-                  onClick={() => setSelectedProduct(null)}
-                  className="inline-flex items-center gap-2 rounded-full bg-[#302b25] px-5 py-3 text-xs text-white transition hover:bg-[#80674d]"
-                >
-                  بازگشت به محصولات
-                  <ArrowLeft size={14} />
-                </button>
+              <div className="mt-4 flex flex-wrap gap-2">
+                {["Next.js", "TypeScript", "Tailwind CSS", "GSAP"].map(
+                  (tag) => (
+                    <span
+                      key={tag}
+                      className="rounded-md border border-[#2A2723] bg-[#141311] px-3 py-1 text-[10px] text-[#D8C2A8]"
+                    >
+                      {tag}
+                    </span>
+                  )
+                )}
               </div>
             </div>
+
+            <a
+              href={PARTO_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex shrink-0 items-center justify-center gap-2 rounded-full bg-[#D8C2A8] px-6 py-3 text-xs font-semibold text-[#111111] transition-all duration-300 hover:bg-[#F7F5F0]"
+            >
+              مشاهده نسخه زنده پرتو
+              <ExternalLink size={15} />
+            </a>
           </div>
         </div>
-      )}
+      </div>
     </section>
   );
 }
