@@ -1,4 +1,5 @@
 import type { LucideIcon } from "lucide-react";
+
 import {
   Code2,
   Sparkles,
@@ -38,7 +39,28 @@ export const storeFeatures: Feature[] = [
   { title: "RTL و فارسی", desc: "کاملاً بهینه برای زبان فارسی", icon: Languages },
   { title: "انیمیشن‌های تعاملی", desc: "تعاملات روان و جذاب", icon: AlignRight },
 ];
-
+export const keyFeatures = [
+  {
+    en: "Ready to Customize",
+    fa: "ساختار آماده و قابل شخصی‌سازی",
+    icon: Code2,
+  },
+  {
+    en: "Smooth Interactions",
+    fa: "انیمیشن‌ها و تعاملات روان",
+    icon: Sparkles,
+  },
+  {
+    en: "Fully Responsive",
+    fa: "نمایش صحیح در موبایل، تبلت و دسکتاپ",
+    icon: Smartphone,
+  },
+  {
+    en: "Elegant Interface",
+    fa: "رابط کاربری لوکس و مینیمال",
+    icon: PenTool,
+  },
+];
 export const included: string[] = [
   "سورس کامل پروژه",
   "ساختار مدرن Next.js",
@@ -63,3 +85,4 @@ export const techs: { name: string; mark: string }[] = [
   { name: "Framer Motion", mark: "F" },
   { name: "next-intl", mark: "i" },
 ];
+

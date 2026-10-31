@@ -29,7 +29,7 @@ function Bar({ dark }: { dark: boolean }) {
 }
 
 export default function Storefront({ layout, className = "" }: Props) {
-  const dark = layout === "dark";
+  const dark = layout === "dark" || layout === "editorial";
   return (
     <div
       dir="ltr"
@@ -37,7 +37,7 @@ export default function Storefront({ layout, className = "" }: Props) {
       className={`h-[620px] w-[1000px] overflow-hidden ${dark ? "bg-[#14110f]" : "bg-[#faf8f4]"} ${className}`}
     >
       <Bar dark={dark} />
-      {layout === "dark" && (
+      {(layout === "dark" || layout === "editorial") && (
         <div className="relative mx-10 mt-2 grid h-[470px] grid-cols-2 items-center">
           <div className="pl-6">
             <p className="font-serif text-6xl font-medium leading-[1.05] text-white">

@@ -24,7 +24,8 @@ export type PageLayout =
   | "account"
   | "form"
   | "content"
-  | "dark";
+  | "dark"
+  | "editorial";
 
 export interface PageEntry {
   label: string;
@@ -55,4 +56,17 @@ export const galleryPages: PageEntry[] = [
   { label: "علاقمندی ها", layout: "account", image: whishImg },
   { label: "ورود", layout: "form", image: loginImg },
   { label: "ثبت نام", layout: "content", image: signupImg},
+];
+export const pageList: string[] = [
+  "صفحه اصلی",
+  "مجموعه محصولات",
+  "صفحه محصول",
+  "سبد خرید",
+  "حساب کاربری",
+  "درباره ما",
+  "ورود و ثبت‌نام",
+  "علاقه‌مندی‌ها",
+  "سفارش‌ها",
+  "گالری محصولات",
+  "تسویه حساب",
 ];
