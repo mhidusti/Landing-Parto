@@ -1,188 +1,195 @@
 
-"use client";
-
-import React, { useState } from "react";
-import {
-  Monitor,
-  Smartphone,
-  ExternalLink,
-  Laptop,
-} from "lucide-react";
-
-const PARTO_URL = "https://demo-parto.chbkn.dev/";
+import React from "react";
 
 export default function PartoMacbookShowcase() {
-  const [deviceMode, setDeviceMode] = useState<
-    "desktop" | "mobile"
-  >("desktop");
-
   return (
     <section
       id="parto-laptop-showcase"
       dir="rtl"
-      className="relative overflow-hidden bg-[#0d0d0d] px-4 py-20 font-sans text-[#F7F5F0] sm:px-8 lg:px-12 lg:py-28"
+      className="relative isolate overflow-hidden bg-[#090909] px-4 py-24 text-[#F1EDE5] sm:px-8 lg:px-12 lg:py-32"
     >
-      {/* Background Glow */}
-      <div className="pointer-events-none absolute left-1/2 top-1/3 h-[550px] w-[550px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#D8C2A8]/5 blur-[150px]" />
+      <style>{`
+        @keyframes partoAmbient {
+          0%, 100% { opacity: .35; transform: scale(.92); }
+          50% { opacity: .7; transform: scale(1.08); }
+        }
+
+        @keyframes partoEnter {
+          from { opacity: 0; transform: translateY(28px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes partoFloat {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-9px); }
+        }
+
+        @keyframes partoShine {
+          0% { transform: translateX(120%) rotate(20deg); }
+          100% { transform: translateX(-120%) rotate(20deg); }
+        }
+
+        .parto-ambient {
+          animation: partoAmbient 8s ease-in-out infinite;
+        }
+
+        .parto-enter {
+          animation: partoEnter 1.1s cubic-bezier(.2,.7,.2,1) both;
+        }
+
+        .parto-float {
+          animation: partoFloat 6s ease-in-out infinite;
+        }
+
+        .parto-shine {
+          animation: partoShine 9s ease-in-out infinite;
+        }
+      `}</style>
+
+      {/* Ambient background */}
+      <div className="pointer-events-none absolute left-1/2 top-1/2 -z-10 h-[650px] w-[650px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#A98A65]/[0.09] blur-[160px]" />
+      <div className="parto-ambient pointer-events-none absolute left-[12%] top-[20%] -z-10 h-72 w-72 rounded-full bg-[#B99B77]/[0.08] blur-[110px]" />
 
       <div className="relative mx-auto max-w-6xl">
-        {/* Header */}
-        <div className="mb-12 text-center">
-          <div className="mx-auto mb-4 inline-flex items-center gap-2 rounded-full border border-[#2A2723] bg-[#161513] px-4 py-2 text-[11px] text-[#D8C2A8]">
-            <Laptop size={14} />
-            پیش‌نمایش زنده قالب پرتو
-          </div>
+        <div className="mx-auto max-w-5xl">
 
-          <h2 className="text-3xl font-medium tracking-tight sm:text-4xl">
-            پرتو را از نزدیک تجربه کنید
-          </h2>
+          {/* Laptop screen */}
+          <div className="relative overflow-hidden rounded-t-[16px] border-[5px] border-[#302D29] bg-[#11100F] shadow-[0_40px_120px_-25px_rgba(0,0,0,.95)] sm:rounded-t-[22px] sm:border-[7px]">
 
-          <p className="mx-auto mt-4 max-w-lg text-sm leading-7 text-[#A89F91]">
-            طراحی، جزئیات و تجربه کاربری قالب پرتو را
-            در نمایش دسکتاپ و موبایل بررسی کنید.
-          </p>
-        </div>
+            {/* Camera */}
+            <div className="absolute left-1/2 top-0 z-30 h-2 w-10 -translate-x-1/2 rounded-b-lg bg-[#24211E]" />
 
-        {/* Device Stage */}
-        <div className="relative mx-auto max-w-4xl">
-          {/* Controls */}
-          <div className="mb-5 flex flex-wrap items-center justify-between gap-4 px-2">
-            <div className="flex items-center gap-2 text-xs text-[#A89F91]">
-              <span className="h-2 w-2 rounded-full bg-[#D8C2A8]" />
-              فروشگاه اینترنتی پرتو
-            </div>
+            <div className="relative aspect-[16/10] overflow-hidden bg-[#EDE8DE] text-[#29251F] sm:aspect-[16/9]">
 
-            <div className="flex items-center gap-1 rounded-xl border border-[#2A2723] bg-[#141311] p-1">
-              <button
-                type="button"
-                onClick={() => setDeviceMode("desktop")}
-                aria-pressed={deviceMode === "desktop"}
-                className={`flex items-center gap-2 rounded-lg px-4 py-2 text-xs transition-all ${
-                  deviceMode === "desktop"
-                    ? "bg-[#D8C2A8] font-semibold text-[#111111]"
-                    : "text-[#8C8275] hover:text-white"
-                }`}
-              >
-                <Monitor size={14} />
-                دسکتاپ
-              </button>
+              {/* Screen background */}
+              <div className="absolute inset-0 bg-[linear-gradient(125deg,#F8F6F0_0%,#F0ECE3_48%,#E4DCCE_100%)]" />
 
-              <button
-                type="button"
-                onClick={() => setDeviceMode("mobile")}
-                aria-pressed={deviceMode === "mobile"}
-                className={`flex items-center gap-2 rounded-lg px-4 py-2 text-xs transition-all ${
-                  deviceMode === "mobile"
-                    ? "bg-[#D8C2A8] font-semibold text-[#111111]"
-                    : "text-[#8C8275] hover:text-white"
-                }`}
-              >
-                <Smartphone size={14} />
-                موبایل
-              </button>
-            </div>
-          </div>
+              {/* Light effects */}
+              <div className="parto-ambient absolute left-[35%] top-[5%] h-[70%] w-[55%] rounded-full bg-[#C5A47B]/25 blur-[100px]" />
+              <div className="absolute -left-[12%] -top-[35%] h-[90%] w-[55%] rounded-full border border-[#A88C6B]/15" />
+              <div className="absolute -left-[7%] -top-[25%] h-[75%] w-[45%] rounded-full border border-[#A88C6B]/20" />
 
-          {/* Device Frame */}
-          <div className="relative mx-auto flex flex-col items-center">
-            <div
-              className={`relative overflow-hidden border-[5px] border-[#2D2A26] bg-[#111111] shadow-[0_25px_80px_-15px_rgba(0,0,0,0.9)] transition-all duration-500 ${
-                deviceMode === "desktop"
-                  ? "aspect-[16/10] w-full rounded-t-2xl"
-                  : "aspect-[9/18] w-[min(100%,340px)] rounded-[2.5rem] border-[7px]"
-              }`}
-            >
-              {deviceMode === "desktop" ? (
-                <div className="flex h-9 items-center justify-between border-b border-[#22201D] bg-[#181614] px-4">
-                  <div className="flex items-center gap-1.5">
-                    <span className="h-2.5 w-2.5 rounded-full bg-[#FF5F56]" />
-                    <span className="h-2.5 w-2.5 rounded-full bg-[#FFBD2E]" />
-                    <span className="h-2.5 w-2.5 rounded-full bg-[#27C93F]" />
-                  </div>
+              {/* Frame */}
+              <div className="absolute inset-[3.5%] border border-[#9B876D]/25" />
 
-                  <div
-                    dir="ltr"
-                    className="max-w-[65%] truncate rounded-md bg-[#0D0D0D] px-4 py-1 text-[10px] text-[#D8C2A8]"
-                  >
-                    demo-parto.chbkn.dev
-                  </div>
+              {/* Decorative corner marks */}
+              <div className="absolute left-[3.5%] top-[3.5%] h-5 w-5 border-l border-t border-[#A88C6B]/60" />
+              <div className="absolute right-[3.5%] top-[3.5%] h-5 w-5 border-r border-t border-[#A88C6B]/60" />
+              <div className="absolute bottom-[3.5%] left-[3.5%] h-5 w-5 border-b border-l border-[#A88C6B]/60" />
+              <div className="absolute bottom-[3.5%] right-[3.5%] h-5 w-5 border-b border-r border-[#A88C6B]/60" />
 
-                  <ExternalLink
-                    size={13}
-                    className="text-[#D8C2A8]/60"
-                  />
-                </div>
-              ) : (
-                <div className="pointer-events-none absolute left-1/2 top-2 z-10 h-5 w-24 -translate-x-1/2 rounded-full bg-black" />
-              )}
-
-              {/* Live Website */}
+              {/* Oversized background typography */}
               <div
-                className={`relative w-full overflow-hidden bg-[#F7F5F0] ${
-                  deviceMode === "desktop"
-                    ? "h-[calc(100%-2.25rem)]"
-                    : "h-full"
-                }`}
+                dir="rtl"
+                className="pointer-events-none absolute left-1/2 top-[43%] -translate-x-1/2 -translate-y-1/2 select-none whitespace-nowrap text-[clamp(90px,19vw,250px)] font-black leading-none tracking-[-.09em] text-[#B7A58B]/[0.10]"
               >
-                <iframe
-                  key={deviceMode}
-                  src={PARTO_URL}
-                  title="پیش‌نمایش زنده فروشگاه پرتو"
-                  loading="lazy"
-                  className="h-full w-full border-0 bg-white"
-                  style={{
-                    width: "100%",
-                    height: "100%",
-                  }}
-                />
+                پرتو
               </div>
-            </div>
 
-            {/* Laptop Base */}
-            {deviceMode === "desktop" && (
-              <div className="relative mx-auto h-4 w-[105%] max-w-[105%] rounded-b-xl border-t border-[#3A3631] bg-gradient-to-b from-[#25221F] to-[#161513] shadow-2xl">
-                <div className="absolute left-1/2 top-0 h-1.5 w-16 -translate-x-1/2 rounded-b-md bg-[#111111]" />
-              </div>
-            )}
-          </div>
+              {/* Main content */}
+              <div className="parto-enter absolute inset-[9%] flex flex-col justify-between">
 
-          {/* Footer */}
-          <div className="mt-12 flex flex-col items-center justify-between gap-6 border-t border-[#222222] pt-7 sm:flex-row">
-            <div>
-              <h3 className="text-lg font-medium">
-                فروشگاه اینترنتی پرتو
-              </h3>
-
-              <p className="mt-2 max-w-lg text-xs leading-7 text-[#A89F91]">
-                قالب فروشگاهی فارسی و راست‌به‌چپ،
-                توسعه‌یافته با Next.js، TypeScript
-                و Tailwind CSS.
-              </p>
-
-              <div className="mt-4 flex flex-wrap gap-2">
-                {["Next.js", "TypeScript", "Tailwind CSS", "GSAP"].map(
-                  (tag) => (
-                    <span
-                      key={tag}
-                      className="rounded-md border border-[#2A2723] bg-[#141311] px-3 py-1 text-[10px] text-[#D8C2A8]"
-                    >
-                      {tag}
+                {/* Top row */}
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-3">
+                    <span className="h-px w-7 bg-[#A88B69]" />
+                    <span className="text-[8px] tracking-[.38em] text-[#927B5F] sm:text-[10px]">
+                      THE ART OF ELEGANCE
                     </span>
-                  )
-                )}
-              </div>
-            </div>
+                  </div>
 
-            <a
-              href={PARTO_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex shrink-0 items-center justify-center gap-2 rounded-full bg-[#D8C2A8] px-6 py-3 text-xs font-semibold text-[#111111] transition-all duration-300 hover:bg-[#F7F5F0]"
-            >
-              مشاهده نسخه زنده پرتو
-              <ExternalLink size={15} />
-            </a>
+                  <span className="font-serif text-[11px] tracking-[.32em] text-[#796B59] sm:text-sm">
+                    PARTO
+                  </span>
+                </div>
+
+                {/* Center composition */}
+                <div className="relative flex flex-1 items-center">
+
+                  {/* Right typography */}
+                  <div className="relative z-10 w-[72%] pt-2 sm:w-[65%]">
+
+                    <div className="mb-4 flex items-center gap-3 sm:mb-7">
+                      <span className="text-[8px] tracking-[.3em] text-[#A48765] sm:text-[10px]">
+                        A NEW PERSPECTIVE
+                      </span>
+                      <span className="h-px w-8 bg-[#B99B77]/60" />
+                    </div>
+
+                    <h2 className="text-[clamp(23px,4.5vw,59px)] font-light leading-[1.85] tracking-tight text-[#302A23]">
+                      زیبایی،
+                      <br />
+                      <span className="relative inline-block font-medium text-[#A0835F]">
+                        به روایتِ پرتو
+                        <span className="absolute -bottom-1 right-0 h-px w-[85%] bg-gradient-to-l from-[#A0835F] to-transparent sm:-bottom-2" />
+                      </span>
+                    </h2>
+
+                    <p className="mt-5 max-w-[300px] text-[9px] leading-7 text-[#827665] sm:mt-8 sm:text-xs sm:leading-8">
+                      برای لحظه‌هایی که ساده می‌گذرند،
+                      <br className="hidden sm:block" />
+                      اما زیبا در خاطر می‌مانند.
+                    </p>
+
+                    <div className="mt-6 flex items-center gap-3 sm:mt-9">
+                      <span className="flex h-7 w-7 items-center justify-center rounded-full border border-[#A98A65]/50 text-[11px] text-[#9B7D5A]">
+                        ↗
+                      </span>
+                      <span className="text-[8px] tracking-[.2em] text-[#8B785F] sm:text-[10px]">
+                        DISCOVER THE BEAUTY
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Decorative jewel-inspired geometry */}
+                  <div className="parto-float absolute left-[4%] top-1/2 flex h-[clamp(100px,20vw,230px)] w-[clamp(100px,20vw,230px)] -translate-y-1/2 items-center justify-center">
+
+                    <div className="absolute inset-0 rotate-45 border border-[#A98A65]/30" />
+                    <div className="absolute inset-[12%] rotate-45 border border-[#A98A65]/40" />
+                    <div className="absolute inset-[25%] rounded-full border border-[#A98A65]/35" />
+                    <div className="absolute inset-[34%] rotate-45 border border-[#A98A65]/50" />
+
+                    <div className="relative flex h-[38%] w-[38%] rotate-45 items-center justify-center border border-[#A98A65]/60 bg-gradient-to-br from-[#FBF8F0] via-[#DCCBB1] to-[#A98A65]/30 shadow-[0_0_45px_rgba(169,138,101,.2)]">
+                      <div className="h-[55%] w-[55%] border border-white/70" />
+                    </div>
+
+                    <span className="absolute -right-2 top-[10%] h-1.5 w-1.5 rounded-full bg-[#A98A65]" />
+                    <span className="absolute -bottom-1 left-[20%] h-1 w-1 rounded-full bg-[#A98A65]" />
+                  </div>
+                </div>
+
+                {/* Bottom editorial details */}
+                <div className="flex items-end justify-between border-t border-[#A98A65]/25 pt-4 sm:pt-5">
+                  <div>
+                    <span className="block text-[7px] tracking-[.3em] text-[#A18A6D] sm:text-[9px]">
+                      OBJECTS OF LIGHT
+                    </span>
+                    <span className="mt-1 block text-[7px] text-[#9A8D7A] sm:text-[9px]">
+                      زیبایی در جزئیات معنا می‌شود
+                    </span>
+                  </div>
+
+                  <div className="text-left">
+                    <span className="block text-[7px] tracking-[.25em] text-[#A18A6D] sm:text-[9px]">
+                      EST. 2026
+                    </span>
+                    <span className="mt-1 block text-[7px] text-[#9A8D7A] sm:text-[9px]">
+                      VOL. 01 — PARTO
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Soft light sweep */}
+              <div className="parto-shine pointer-events-none absolute -inset-y-[40%] left-0 w-[18%] bg-gradient-to-r from-transparent via-white/20 to-transparent blur-2xl" />
+            </div>
           </div>
+
+          {/* Laptop base */}
+          <div className="relative mx-auto h-3 w-[106%] -translate-x-[2.8%] rounded-b-[50%] border-t border-[#514B43] bg-gradient-to-b from-[#38342F] via-[#24211E] to-[#151412] shadow-[0_18px_35px_rgba(0,0,0,.65)] sm:h-5">
+            <div className="absolute left-1/2 top-0 h-1 w-20 -translate-x-1/2 rounded-b-lg bg-[#171513] sm:w-28" />
+          </div>
+
         </div>
       </div>
     </section>
